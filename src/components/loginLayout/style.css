@@ -1,0 +1,28 @@
+.mainContainer{
+    position: relative;
+}
+
+.loginDesc{
+    border: 2px solid green;
+    position: absolute;
+    left: 26%;
+  top: 34%;
+  padding: 20px;
+  border-radius: 20px;
+  width: 28%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  align-content: center;
+}
+
+.heading {
+  margin-block: 5px;
+}
+
+.subHeading {
+  margin: 0;
+}
+
+
+
