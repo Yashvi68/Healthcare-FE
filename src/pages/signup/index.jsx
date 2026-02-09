@@ -2,42 +2,42 @@ import { Input } from "../../components/form/input"
 import { LoginLayout } from "../../components/loginLayout"
 import { useForm } from "react-hook-form"
 import loginImage from "../../assets/images/loginImage.png"
-import {Link} from "react-router"
+import { Link } from "react-router"
 import { Button } from "../../components/form/button"
 import { buttons, links } from "../../components/constants/data"
 import { httpPost } from "../../services/httpPOST"
+import { api } from "../../components/constants/api"
 
+export const SignUp = () => {
+    const form = useForm()
 
-export const SignUp = () =>{
-     const form = useForm()
-   
-        const { register,
-            formState: { errors },
-            handleSubmit,
-            watch
-        } = form
+    const { register,
+        formState: { errors },
+        handleSubmit,
+        watch
+    } = form
 
-        const onSubmit = async(data) => {
+    const onSubmit = async (data) => {
         // console.log("==Signup Data==", data)
         // api call 
         const formData = new FormData()
-        console.log("==formdata==",formData)
-        formData.append("email",data.email) //key-value
-        formData.append("password",data.password) //key-value
+        console.log("==formdata==", formData)
+        formData.append("email", data.email) //key-value
+        formData.append("password", data.password) //key-value
 
-        const res = await httpPost(api.signup ,formData)
+        const res = await httpPost(api.signup, formData)
 
         //checking result from backend
-        if(res.status){
+        if (res.status) {
             console.log("User registration done !")
-        }else{
+        } else {
             console.log("User registration failed")
         }
     }
-    return(
+    return (
         <div>
             <LoginLayout
-            heading="Create Account"
+                heading="Create Account"
                 subHeading="Sign up to get started!"
                 imageSrc={loginImage}
                 imageAlt="Signup Illustration"
@@ -50,7 +50,7 @@ export const SignUp = () =>{
                         errorMsg={errors?.fullName?.type === "required" ? "Name is required" : "Name must be at least 3 chars"}
                     /> */}
 
-                      <Input
+                    <Input
                         placeholder="Email"
                         {...register("email", {
                             required: true,
@@ -60,12 +60,12 @@ export const SignUp = () =>{
                         errorMsg={errors?.email?.type === "required" ? "Email is required" : "Invalid email address"}
                     />
 
-                    <Input 
-                     placeholder="Password"
-                        type="password" 
+                    <Input
+                        placeholder="Password"
+                        type="password"
                         {...register("password", {
                             required: true,
-                             pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=$$$${};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=$$$${};':"\\|,.<>\/?`~]{6,}$/
+                            pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=$$$${};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=$$$${};':"\\|,.<>\/?`~]{6,}$/
                         })}
                         showErrors={errors?.password?.type === "required" || errors?.password?.type === "pattern"}
                         errorMsg={
@@ -75,7 +75,7 @@ export const SignUp = () =>{
                         }
                     />
 
-                      {/* Confirm Password Input (New Logic) */}
+                    {/* Confirm Password Input (New Logic) */}
                     <Input
                         placeholder="Confirm Password"
                         type="password"

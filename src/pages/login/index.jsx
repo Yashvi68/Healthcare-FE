@@ -7,6 +7,8 @@ import "../../components/loginLayout/style.css"
 import loginImage from "../../assets/images/loginImage.png"
 import {Link} from "react-router"
 import "./style.css"
+import { httpPost } from "../../services/httpPOST"
+import { api } from "../../components/constants/api"
 
 export const Login = () => {
     const form = useForm()
@@ -17,8 +19,19 @@ export const Login = () => {
         handleSubmit
     } = form
     // console.log("==register==", register)
-     const onSubmit = (data) => {
-        console.log("==data==",data)
+     const onSubmit = async(data) => {
+        // console.log("==data==",data)
+        const formData = new FormData()
+        formData.append("email",data.email)
+        formData.append("password",data.password)
+
+        const res = await httpPost(api.login, formData)
+        if(res.status){
+            console.log("login success")
+        }
+        else{
+            console.log("issue while logging!")
+        }
   };
     return (
         <div className="main-container">
