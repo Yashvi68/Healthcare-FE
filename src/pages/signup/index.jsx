@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form"
 import loginImage from "../../assets/images/loginImage.png"
 import { Link } from "react-router"
 import { Button } from "../../components/form/button"
-import { buttons, links } from "../../components/constants/data"
+import { buttons, links } from "../../constants/data"
 import { httpPost } from "../../services/httpPOST"
-import { api } from "../../components/constants/api"
+import { api } from "../../constants/api"
 
 export const SignUp = () => {
     const form = useForm()
@@ -26,6 +26,7 @@ export const SignUp = () => {
         formData.append("password", data.password) //key-value
 
         const res = await httpPost(api.signup, formData)
+
 
         //checking result from backend
         if (res.status) {

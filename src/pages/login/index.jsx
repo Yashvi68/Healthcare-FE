@@ -1,23 +1,25 @@
 import { Button } from "../../components/form/button"
 import { Input } from "../../components/form/input"
-import { buttons, links } from "../../components/constants/data"
+import { buttons, links } from "../../constants/data"
 import { useForm } from "react-hook-form"
 import { LoginLayout } from "../../components/loginLayout"
-import "../../components/loginLayout/style.css"
 import loginImage from "../../assets/images/loginImage.png"
 import {Link} from "react-router"
-import "./style.css"
+import styles from "./style.module.scss";
 import { httpPost } from "../../services/httpPOST"
-import { api } from "../../components/constants/api"
+import { api } from "../../constants/api"
+import { useAuthStore } from "../../zustand/auth-store"
+import { setUserDetails } from "../../zustand/auth-store/actions"
 
 export const Login = () => {
-    const form = useForm()
+
+    const {userDetails} = useAuthStore();
+    console.log(userDetails, 'userDetails')
+    const {register,
+        formState: { errors },
+        handleSubmit} = useForm()
     // console.log("==form==", form)
 
-    const { register,
-        formState: { errors },
-        handleSubmit
-    } = form
     // console.log("==register==", register)
      const onSubmit = async(data) => {
         // console.log("==data==",data)
@@ -26,6 +28,7 @@ export const Login = () => {
         formData.append("password",data.password)
 
         const res = await httpPost(api.login, formData)
+            setUserDetails("loggedin")
         if(res.status){
             console.log("login success")
         }
@@ -34,7 +37,7 @@ export const Login = () => {
         }
   };
     return (
-        <div className="main-container">
+       
             <LoginLayout
                 heading="Welcome Back"
                 subHeading="Sign in to continue to your account."
@@ -42,10 +45,11 @@ export const Login = () => {
             >
                 <form 
                 onSubmit={handleSubmit(onSubmit)}
-                className="formContainer"
+                className={styles.formContainer}
                 >
                     <Input
                         placeholder="Email"
+                        className = {styles.inputBox}
                         {...register("email", {
                             required: true,
                             pattern:
@@ -65,6 +69,7 @@ export const Login = () => {
                     {/*password */}
                     <Input
                         placeholder="Password"
+                        className = {styles.inputBox}
                         {...register("password", {
                             required: true,
                             pattern: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=$$$${};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=$$$${};':"\\|,.<>\/?`~]{6,}$/
@@ -79,32 +84,32 @@ export const Login = () => {
                     </Input>
 
                     {/*forgot pasword */}
-                <div className="forgot-password-wrapper">
-                        <Link to="/forgot-password" className="auth-link">
+                <div className={styles.forgotPassword} >
+                        <Link to="/forgot-password" className={styles.authLink}>
                             {links.forgotPassword || "Forgot Password?"}
                         </Link>
                     </div>
                     {/*signin button */}
                     <Button
                         type="submit"
-                        className="primary-btn"
+                        className={styles.primaryBtn}
                     >
                         {buttons.signin}
                     </Button>
 
                      {/*  Sign Up */}
-                    <div className="signup-footer">
+                    {/* <div className="signup-footer">
                         <p className="signup-text">
                             {links.signupText}{" "}
                             <Link to="/signup" className="signup-link">
                                 {links.signupLink}
                             </Link>
                         </p>
-                    </div>
+                    </div> */}
                 </form>
             </LoginLayout>
 
 
-        </div>
+     
     )
 }

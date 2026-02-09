@@ -1,0 +1,65 @@
+.formContainer {
+    width: 85%; 
+    margin: 0 auto; 
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+}
+
+ .forgotPassword {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -8px; 
+    margin-bottom: 4px;
+} 
+
+.authLink {
+    color: #343434;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.bold-link {
+    font-weight: 600; 
+}
+
+.signup-footer {
+    margin-top: 10px;
+    text-align: center; 
+}
+
+.signup-text {
+    font-size: 14px;
+    color: #666; 
+    margin: 0;
+}
+
+.inputBox{
+   width: 100%;
+  padding: 10px ;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  outline: none;
+  border: none;
+  &::placeholder {
+    font-size: 12px; 
+  }
+}
+
+.primaryBtn {
+    width: 100%;
+    padding: 10px 16px; 
+    font-size: 16px;
+    font-weight: 500; 
+    color: #ffffff;
+    border: none;
+    border-radius: 6px; 
+    cursor: pointer;
+    text-align: center;
+     background: linear-gradient(126.66deg, #33E9A1 1.51%, #03287E 117.24%);
+    box-shadow: 0 4px 15px rgba(91, 134, 229, 0.3); 
+    transition: all 0.3s ease;
+}
