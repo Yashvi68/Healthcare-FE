@@ -1,5 +1,8 @@
 .mainContainer{
-    position: relative;
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .loginDesc{
@@ -23,6 +26,4 @@
 .subHeading {
   margin: 0;
 }
-
-
 

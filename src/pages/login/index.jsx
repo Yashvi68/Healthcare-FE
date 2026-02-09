@@ -4,7 +4,9 @@ import { buttons, links } from "../../components/constants/data"
 import { useForm } from "react-hook-form"
 import { LoginLayout } from "../../components/loginLayout"
 import "../../components/loginLayout/style.css"
-// import { Link } from "react-router"
+import loginImage from "../../assets/images/loginImage.png"
+import {Link} from "react-router"
+import "./style.css"
 
 export const Login = () => {
     const form = useForm()
@@ -23,8 +25,12 @@ export const Login = () => {
             <LoginLayout
                 heading="Welcome Back"
                 subHeading="Sign in to continue to your account."
+                imageSrc = {loginImage}
             >
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form 
+                onSubmit={handleSubmit(onSubmit)}
+                className="formContainer"
+                >
                     <Input
                         placeholder="Email"
                         {...register("email", {
@@ -60,14 +66,28 @@ export const Login = () => {
                     </Input>
 
                     {/*forgot pasword */}
-                    <a href="https://www.google.com">{links.forgotPassword}</a>
-
+                <div className="forgot-password-wrapper">
+                        <Link to="/forgot-password" className="auth-link">
+                            {links.forgotPassword || "Forgot Password?"}
+                        </Link>
+                    </div>
                     {/*signin button */}
                     <Button
                         type="submit"
+                        className="primary-btn"
                     >
                         {buttons.signin}
                     </Button>
+
+                     {/*  Sign Up */}
+                    <div className="signup-footer">
+                        <p className="signup-text">
+                            {links.signupText}{" "}
+                            <Link to="/signup" className="signup-link">
+                                {links.signupLink}
+                            </Link>
+                        </p>
+                    </div>
                 </form>
             </LoginLayout>
 

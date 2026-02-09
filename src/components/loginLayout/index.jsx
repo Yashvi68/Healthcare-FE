@@ -1,10 +1,14 @@
 import "./style.css"
-export const LoginLayout = ({heading , subHeading, children})=>{
+import { Image } from "../image"
+export const LoginLayout = (props)=>{
+    const {heading , subHeading, children, imageSrc,imageAlt,...restProps} = props
     return(
         <div className="mainContainer">
             <figure>
-                {/* <Image /> */}
-                <img src="src\assets\login.png" alt="img" />
+                <Image
+                src = {imageSrc}
+                alt = {imageAlt}
+                />
             </figure>
             <div className="loginDesc">
                 <h2 className="heading">{heading}</h2>

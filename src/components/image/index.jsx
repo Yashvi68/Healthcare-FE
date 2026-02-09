@@ -1,9 +1,13 @@
-export const Image = ()=>{
+export const Image = ( props) =>{
+    const { src, alt, className, ...rest} = props
     return(
         <>
-        <img 
-        src="" 
-        alt="" 
+        <img
+            src={src}
+            alt={alt || "app-image"} 
+            className={className}
+            loading="lazy" 
+            {...rest} 
         />
         </>
     )
