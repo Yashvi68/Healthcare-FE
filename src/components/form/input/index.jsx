@@ -26,7 +26,7 @@ export const Input = forwardRef((props, ref) => {
                 />
                 {children}
             </div>
-            {showErrors && <p>{errorMsg}</p>}
+            {showErrors && <p className="errorMessage">{errorMsg}</p>}
         </div>
     )
 })

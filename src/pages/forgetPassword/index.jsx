@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { Button } from "../../components/form/button"
 import { Input } from "../../components/form/input"
-import { buttons, links } from "../../components/constants/data"
+import { buttons, links } from "../../constants/data"
 import { LoginLayout } from "../../components/loginLayout"
-import "../../components/loginLayout/style.css"
+import "../../components/loginLayout/style.module.scss"
 
 import loginImage from "../../assets/images/loginImage.png"
 
@@ -54,8 +54,8 @@ export const ForgotPassword = () => {
 
                     
                     <div className="signup-footer" style={{ marginTop: '20px' }}>
-                        <Link to="/login" className="signup-link" style={{ marginLeft: 0 }}>
-                            &larr; Back to Login
+                        <Link to="/" className="signup-link" style={{ marginLeft: 0 }}>
+                            Back to Login
                         </Link>
                     </div>
 

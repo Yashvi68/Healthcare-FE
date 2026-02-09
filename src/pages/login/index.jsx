@@ -14,7 +14,7 @@ import { setUserDetails } from "../../zustand/auth-store/actions"
 export const Login = () => {
 
     const {userDetails} = useAuthStore();
-    console.log(userDetails, 'userDetails')
+    // console.log(userDetails, 'userDetails')
     const {register,
         formState: { errors },
         handleSubmit} = useForm()
@@ -23,18 +23,27 @@ export const Login = () => {
     // console.log("==register==", register)
      const onSubmit = async(data) => {
         // console.log("==data==",data)
-        const formData = new FormData()
-        formData.append("email",data.email)
-        formData.append("password",data.password)
+        // const formData = new FormData()
+        // formData.append("email",data.email)
+        // formData.append("password",data.password)
 
-        const res = await httpPost(api.login, formData)
-            setUserDetails("loggedin")
-        if(res.status){
-            console.log("login success")
-        }
-        else{
-            console.log("issue while logging!")
-        }
+// *********PAYLOAD : FE JO DATA BE KO BHEJTA THAT IS PAYLOAD*************
+const payload = {
+    email : data.email,
+    password : data.password
+}
+
+    const res = await httpPost(api.login, payload, false); 
+            // setUserDetails("loggedin")
+        if(res.status) {
+            setUserDetails(res.data);
+            console.log("Login Success", res.data);
+
+        //saving token that BE is sending
+         localStorage.setItem('token', res.data.token);
+    } else {
+        console.log("Login Failed", res.data);
+    }
   };
     return (
        
