@@ -32,7 +32,7 @@ const payload = {
     email : data.email,
     password : data.password
 }
-
+console.log("==payload==",payload)
     const res = await httpPost(api.login, payload, false); 
             // setUserDetails("loggedin")
         if(res.status) {
