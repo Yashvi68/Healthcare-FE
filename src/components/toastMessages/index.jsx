@@ -6,7 +6,6 @@ import styles from "./style.module.scss"
 
 export const ToastMessage = () => {
     const { message, status } = useToastStore()
-    console.log("Toast Debug:", { message, status });
     
     useEffect(() => {
         const timer = setTimeout(() => {

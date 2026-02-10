@@ -15,7 +15,6 @@ export const HttpPostHook = (method = "POST", isNormal = false) => {
     const headers = isNormal ? normalHeader : documentHeader
 
     const httpPOST = async (url, payload) => {
-        console.log("🛠️ Hook: httpPOST Started with URL:", url);
         try {
             setLoading(true)
             const sendRequest = await fetch(url, {
@@ -24,19 +23,14 @@ export const HttpPostHook = (method = "POST", isNormal = false) => {
                 // credentials: "include",
                 body: isNormal ? JSON.stringify(payload) : payload
             })
-                  console.log("Hook: Fetch Completed. Status:", sendRequest.status);
                   const convertResponseToJson = await sendRequest.json()
-                  console.log("JSON Parsed:", convertResponseToJson);
             setLoading(false)
             if (sendRequest.ok) {
-                console.log("🟢 Setting Success Toast");
                 setStatus("success")
                 setMessage( "Operation Successful");
 
             }
             else{
-                console.log(" Setting error Toast");
-                console.log("toast error")
                 setStatus("error");
         setMessage(convertResponseToJson.message || "Something went wrong");
      
@@ -44,7 +38,6 @@ export const HttpPostHook = (method = "POST", isNormal = false) => {
             return convertResponseToJson;
 
         } catch (error) {
-            console.error("==Error==:", error);
             // return {
             //     status: false,
             //     error: error.message || "Network Error"
