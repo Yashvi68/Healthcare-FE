@@ -11,18 +11,26 @@ import { useAuthStore } from "../../zustand/auth-store"
 import { setUserDetails } from "../../zustand/auth-store/actions"
 import { HttpPostHook } from "../../services/httpPostHook"
 import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
+import { roles } from "../../constants/roles"
 
 export const Login = () => {
 
     const { userDetails } = useAuthStore();
     const { httpPOST, isLoading } = HttpPostHook("POST", true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     // console.log(userDetails, 'userDetails')
     const { register,
         formState: { errors },
         handleSubmit } = useForm()
     // console.log("==form==", form)
     // console.log("==register==", register)
+useEffect(()=>{
+    if(userDetails?.role === roles.superAdmin){
+        navigate("/dashboard/general-overview")
+    }
+},[userDetails])
     const onSubmit = async (data) => {
         // console.log("==data==",data)
         // const formData = new FormData()
@@ -37,12 +45,11 @@ export const Login = () => {
         console.log("==payload==", payload)
         const res = await httpPOST(api.login, payload);
         // setUserDetails("loggedin")
-        if (res && res.status) {
-            setUserDetails(res.data);
-            console.log("Login Success", res.data);
-
+        if (res?.sucess) {
+            setUserDetails(res);
+            console.log("Login Success", res);
             //saving token that BE is sending
-            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('token', res.token);
         }
     };
     return (

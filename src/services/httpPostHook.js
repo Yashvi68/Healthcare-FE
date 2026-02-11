@@ -18,7 +18,7 @@ export const HttpPostHook = (method = "POST", isNormal = false) => {
         try {
             setLoading(true)
             const sendRequest = await fetch(url, {
-                method, // hum yaha method default POST nahi rakhenge bcoz in casePUT method lgani hui then issue aa jayega
+                method, // hum yaha method default POST nahi rakhenge bcoz in case PUT method lgani hui then issue aa jayega
                 headers,
                 // credentials: "include",
                 body: isNormal ? JSON.stringify(payload) : payload
