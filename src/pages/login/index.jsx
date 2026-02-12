@@ -27,7 +27,7 @@ export const Login = () => {
     // console.log("==form==", form)
     // console.log("==register==", register)
 useEffect(()=>{
-    if(userDetails?.role === roles.superAdmin){
+    if(userDetails?.data?.role === roles.superAdmin){
         navigate("/dashboard/general-overview")
     }
 },[userDetails])
@@ -45,7 +45,7 @@ useEffect(()=>{
         console.log("==payload==", payload)
         const res = await httpPOST(api.login, payload);
         // setUserDetails("loggedin")
-        if (res?.sucess) {
+        if (res?.success) {
             setUserDetails(res);
             console.log("Login Success", res);
             //saving token that BE is sending

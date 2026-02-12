@@ -2,29 +2,34 @@ import { NavLink, useNavigate } from "react-router";
 import logo from "../../assets/images/logo.png"
 import styles from "./style.module.scss";
 import { buttons } from "../../constants/data";
-import {sideBarData}  from "../../constants/sideBarData";
+import { sideBarData } from "../../constants/sideBarData";
 import { filterByRole } from "../../utils/filterByRole";
 import { useAuthStore } from "../../zustand/auth-store";
 import { roles } from "../../constants/roles";
-import { LogOutIcon } from "../svg";
+import { DownArrowIcon, LogOutIcon, UpArrowIcon } from "../svg";
 import { setMessage, setStatus } from "../../zustand/toastMessage-store/action";
 import { setUserDetails } from "../../zustand/auth-store/actions";
 import { useState } from "react";
-// import { handleLogOut } from "../../utils/logOutFnc";
 
 export const SideBar = () => {
-    const[selectedItem, setSelectedItem] = useState(null)
+    const [selectedItem, setSelectedItem] = useState(null) //menu tracking --> initially sab close h
+
     const { userDetails } = useAuthStore()
     const sideData = sideBarData()
     const currentRole = userDetails?.role || roles.superAdmin;
     const authenticatedMenu = filterByRole(sideData, currentRole)
     const navigate = useNavigate()
-    const handleLogOut = ()=>{
+
+    const handleLogOut = () => {
         localStorage.removeItem('token')
         setUserDetails(null)
         setStatus("success")
         setMessage("Logged out successfully")
         navigate("/")
+    }
+
+    const handleToggle = (index) => {
+        setSelectedItem(prev => prev === index ? null : index)
     }
 
     return (
@@ -37,26 +42,45 @@ export const SideBar = () => {
                 {authenticatedMenu.map((item, index) => {
                     return (
                         <div className={styles.menuChildItems} key={index}>
-                            <div className={styles.menuItems}>
+                            {/* role acc menu items */}
+                            <div
+                                className={styles.menuItems}
+                                onClick={() => handleToggle(index)}
+                            >
                                 <NavLink
-                                to={item.navigate}>
+                                    to={item.navigate}
+                                    className={({ isActive }) =>
+                                        isActive ? styles.activeMenuItem : styles.menuLink
+                                    }
+                                >
+                                    {/* items */}
                                     <div className={styles.items}>
                                         <div className={styles.itemIcon}>{item?.icon}</div>
                                         <p className={styles.menuName}>{item?.title}</p>
                                     </div>
 
+                                    {/* up-down arrow */}
                                     <div className={styles.childArrow}>
-                                        {/* up/down arrow */}
+                                        {item?.children && (
+                                            selectedItem === index ?
+                                                <UpArrowIcon /> :
+                                                <DownArrowIcon />
+                                        )}
                                     </div>
                                 </NavLink>
                             </div>
                             {/**agar item k bhi children hai then.. */}
-                            {item?.children?.length && (
+                            {item?.children?.length > 0 && selectedItem === index && (
                                 <ul>
-                                    {item?.children?.map((elem,elemId)=>{
-                                        return(
-                                            <li key={elemId}>
-                                                <NavLink to={elem.navigate}>
+                                    {item?.children?.map((elem, elemId) => {
+                                        return (
+                                            <li key={elemId} className={styles.list}>
+                                                <NavLink
+                                                    to={elem.navigate}
+                                                     className={({ isActive }) =>
+    isActive ? styles.activeSubMenu : styles.subMenu
+  }
+                                                >
                                                     {elem.title}
                                                 </NavLink>
                                             </li>
@@ -70,9 +94,9 @@ export const SideBar = () => {
 
             </div>
             {/* logout */}
-            <div 
-            className={styles.logOutContainer}
-            onClick={handleLogOut}
+            <div
+                className={styles.logOutContainer}
+                onClick={handleLogOut}
             >
                 <LogOutIcon />
                 <p>{buttons.logout}</p>

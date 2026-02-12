@@ -538,3 +538,46 @@ export const VirtualPatientIcon = () => {
     </svg>
   );
 };
+
+export const UpArrowIcon = ({ customClass }) => {
+  return (
+    <svg
+      width="11"
+      height="13"
+      viewBox="0 0 12 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={customClass}
+    >
+      <path
+        d="M11 10L6 4L1 10"
+        stroke="#4A4759"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+
+export const DownArrowIcon = ({ customClass }) => {
+  return (
+    <svg
+      width="11"
+      height="8"
+      viewBox="0 0 12 8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={customClass}
+    >
+      <path
+        d="M1 1L6 7L11 1"
+        stroke="#4A4759"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
