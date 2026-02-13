@@ -1,5 +1,5 @@
 export const roles = {
-    superAdmin : "superadmin", //this too changed
+    superAdmin : "Super Admin", 
     admin : "Admin",
     teacher:"Teacher",
     student:"Student"

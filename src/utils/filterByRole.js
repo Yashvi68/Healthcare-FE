@@ -6,7 +6,7 @@ export const filterByRole =  (data, loggedInRole)=>{
     const s = allowedRoles.map((item)=>{
         if(item?.children){
             let childArr = filterByRole(item?.children,loggedInRole)
-            console.log("==childArr==",childArr)
+            // console.log("==childArr==",childArr)
             return{
                 ...item,
                 children:childArr

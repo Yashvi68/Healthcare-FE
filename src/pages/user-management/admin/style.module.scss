@@ -1,0 +1,36 @@
+.mainContainer{
+    border: 2px solid coral;
+    margin-top: 30px;
+    border-radius: 6px;
+    padding: 20px;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.createContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.searchArea{
+    color: #74788d;
+    border: 1px solid palevioletred;
+    padding: 10px;
+    border-radius: 6px;
+    background: #f9fafb;
+}
+
+.btn{
+    background: linear-gradient(126.66deg, #33E9A1 1.51%, #03287E 117.24%);
+    color: #ffffff;
+    padding: 10px 16px;
+    text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    height: max-content;
+    border-radius: 6px;
+}

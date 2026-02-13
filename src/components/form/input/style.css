@@ -1,0 +1,21 @@
+.inputField {
+  position: relative; /* Essential for positioning the icon */
+  display: flex;
+  align-items: center;
+}
+
+.inputField input {
+  width: 100%;
+  padding-right: 40px; /* Add padding so text doesn't type over the icon */
+}
+
+/* This targets the icon you passed as children */
+.inputField > svg {
+  position: absolute;
+  right: 10px; /* Adjust based on your design */
+  top: 50%;
+  transform: translateY(-50%); /* Centers the icon vertically */
+  pointer-events: none; /* Allows clicking "through" the icon to the input */
+  width: 20px; /* Ensure icon has a size */
+  height: 20px;
+}

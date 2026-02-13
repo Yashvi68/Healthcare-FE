@@ -2,7 +2,8 @@ export const buttons = {
     signin:"Sign In",
     signup: "Sign Up",
     resetpassword : "Reset Password",
-    logout:"Log out"
+    logout:"Log out",
+    createAdmin : "Create Admin"
 }
 
 export const links = {
